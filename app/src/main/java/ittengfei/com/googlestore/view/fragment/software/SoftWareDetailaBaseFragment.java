@@ -38,7 +38,17 @@ public class SoftWareDetailaBaseFragment extends BaseFragment<SoftWarePreSenter>
     protected View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(context);
         textView.setText(content.toString());
-        return textView;
+        return new BaseContent(context) {
+            @Override
+            protected String getUrl() {
+                return content.getUrl();
+            }
+
+            @Override
+            protected void loadDate() {
+
+            }
+        };
     }
 
     @Override

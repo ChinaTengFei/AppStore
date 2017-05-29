@@ -53,12 +53,12 @@ public abstract class BaseContent extends FrameLayout {
     }
 
     private void syncRequest() {
-
+        
     }
 
     protected void show(){
 
     };
-
+    abstract protected String getUrl();
     abstract protected void loadDate();
 }
