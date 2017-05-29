@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ittengfei.com.googlestore.weiget.NoScrollViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ittengfei.com.googlestore.weiget.NoScrollViewPager>
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_index"
+            style="@style/MainActivityTabButton"
+            android:text="首页"/>
+
+        <RadioButton
+            android:id="@+id/rb_software"
+            style="@style/MainActivityTabButton"
+            android:text="软件"/>
+
+        <RadioButton
+            android:id="@+id/rb_game"
+            style="@style/MainActivityTabButton"
+            android:text="游戏"/>
+
+        <RadioButton
+            android:id="@+id/rb_personal"
+            style="@style/MainActivityTabButton"
+            android:text="个人"/>
+    </RadioGroup>
+</LinearLayout>
