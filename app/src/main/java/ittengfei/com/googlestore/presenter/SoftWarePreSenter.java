@@ -11,7 +11,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import ittengfei.com.googlestore.StoreApplition;
 import ittengfei.com.googlestore.model.TitleValueBean;
-import ittengfei.com.googlestore.net.SoftWareApiService;
+import ittengfei.com.googlestore.net.MainApiService;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,8 +28,8 @@ public class SoftWarePreSenter extends BasePresenter implements SoftWare.Present
     }
 
     public void loadData(){
-        SoftWareApiService softWareApiService = StoreApplition.getInstance().getBuild().create(SoftWareApiService.class);
-        softWareApiService.getSoftWareContent().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Consumer<ArrayList<TitleValueBean>>() {
+        MainApiService mainApiService = StoreApplition.getInstance().getBuild().create(MainApiService.class);
+        mainApiService.getSoftWareContent().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Consumer<ArrayList<TitleValueBean>>() {
             @Override
             public void accept(@NonNull ArrayList<TitleValueBean> titleValueBean) throws Exception {
                 Log.d(TAG, "accept() called with: titleValueBean = [" + titleValueBean + "]");

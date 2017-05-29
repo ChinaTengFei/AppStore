@@ -5,46 +5,69 @@ package ittengfei.com.googlestore.model;
  */
 
 public class SoftWareBean {
-    private String title;
-    private String bitmapUrl;
-    private String describe;
+    private int id;
 
-    public SoftWareBean(String title, String bitmapUrl, String describe) {
-        this.title = title;
-        this.bitmapUrl = bitmapUrl;
-        this.describe = describe;
+    private String name;
+
+    private String packageName;
+
+    private String iconUrl;
+
+    private int stars;
+
+    private int size;
+
+    private String downloadUrl;
+
+    private String des;
+
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return this.id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public void setPackageName(String packageName){
+        this.packageName = packageName;
+    }
+    public String getPackageName(){
+        return this.packageName;
+    }
+    public void setIconUrl(String iconUrl){
+        this.iconUrl = iconUrl;
+    }
+    public String getIconUrl(){
+        return this.iconUrl;
+    }
+    public void setStars(int stars){
+        this.stars = stars;
+    }
+    public int getStars(){
+        return this.stars;
+    }
+    public void setSize(int size){
+        this.size = size;
+    }
+    public int getSize(){
+        return this.size;
+    }
+    public void setDownloadUrl(String downloadUrl){
+        this.downloadUrl = downloadUrl;
+    }
+    public String getDownloadUrl(){
+        return this.downloadUrl;
+    }
+    public void setDes(String des){
+        this.des = des;
+    }
+    public String getDes(){
+        return this.des;
     }
 
-    @Override
-    public String toString() {
-        return "SoftWareBean{" +
-                "title='" + title + '\'' +
-                ", bitmapUrl='" + bitmapUrl + '\'' +
-                ", describe='" + describe + '\'' +
-                '}';
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBitmapUrl() {
-        return bitmapUrl;
-    }
-
-    public void setBitmapUrl(String bitmapUrl) {
-        this.bitmapUrl = bitmapUrl;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
 }

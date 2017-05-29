@@ -4,7 +4,7 @@ package ittengfei.com.googlestore.net;
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
-import ittengfei.com.googlestore.model.TitleValueBean;
+import ittengfei.com.googlestore.model.SoftWareBean;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -13,9 +13,7 @@ import retrofit2.http.Path;
  */
 
 public interface SoftWareApiService {
-    @GET("software/software")
-    Observable<ArrayList<TitleValueBean>> getSoftWareContent();
 
     @GET("software/{softwareType}")
-    Observable<TitleValueBean> getSoftWareItemByType(@Path("softwareType")String Type);
+    Observable<ArrayList<SoftWareBean>> getSoftWareItemByType(@Path("softwareType")String Type);
 }
