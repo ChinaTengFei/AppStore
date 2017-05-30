@@ -8,16 +8,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
-
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ittengfei.com.googlestore.R;
-import ittengfei.com.googlestore.StoreApplition;
-import ittengfei.com.googlestore.model.SoftWareBean;
-import ittengfei.com.googlestore.net.SoftWareApiService;
 
 import static ittengfei.com.googlestore.view.fragment.software.BaseContent.Load_State.STATE_Loading;
 import static ittengfei.com.googlestore.view.fragment.software.BaseContent.Load_State.State_Failed;
@@ -27,9 +23,9 @@ import static ittengfei.com.googlestore.view.fragment.software.BaseContent.Load_
  * Created by Administrator on 2017-05-28.
  */
 
-public abstract class BaseContent extends FrameLayout {
+public abstract class BaseContent<T> extends FrameLayout {
     private Context context;
-    private ArrayList<SoftWareBean> softWareBeen;
+    private T softWareBeen;
     private View pageLoading;
     private View pageFailed;
 
@@ -37,8 +33,7 @@ public abstract class BaseContent extends FrameLayout {
         STATE_Loading, State_Succes, State_Failed
     }
 
-    Load_State load_state;
-
+    Load_State load_state = Load_State.STATE_Loading;
     public BaseContent(@NonNull Context context) {
         this(context, null);
     }
@@ -60,21 +55,22 @@ public abstract class BaseContent extends FrameLayout {
         pageFailed = View.inflate(context, R.layout.page_failed, null);
         addView(pageFailed);
 
+        checkShow();
         syncRequest();
     }
 
     private void syncRequest() {
-        SoftWareApiService softWareApiService = StoreApplition.getInstance().getBuild().create(SoftWareApiService.class);
-        softWareApiService.getSoftWareItemByType("applist3").observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Observer<ArrayList<SoftWareBean>>() {
+
+        loadData().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Observer<T>() {
 
 
             @Override
             public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-                load_state = Load_State.STATE_Loading;
+
             }
 
             @Override
-            public void onNext(@io.reactivex.annotations.NonNull ArrayList<SoftWareBean> softWareBeen) {
+            public void onNext(@io.reactivex.annotations.NonNull T softWareBeen) {
                 BaseContent.this.softWareBeen = softWareBeen;
                 load_state = Load_State.State_Succes;
             }
@@ -82,16 +78,18 @@ public abstract class BaseContent extends FrameLayout {
             @Override
             public void onError(@io.reactivex.annotations.NonNull Throwable e) {
                 load_state= State_Failed;
+                checkShow();
             }
 
             @Override
             public void onComplete() {
                 checkShow();
             }
+
         });
     }
 
-    protected abstract View createSuccesView(ArrayList<SoftWareBean> softWareBeen);
+    protected abstract View createSuccesView(T softWareBeen);
 
     protected void checkShow(){
         pageLoading.setVisibility(load_state==STATE_Loading?VISIBLE:INVISIBLE);
@@ -102,6 +100,5 @@ public abstract class BaseContent extends FrameLayout {
             pageFailed.setVisibility(INVISIBLE);
         }
     };
-    abstract protected String getUrl();
-    abstract protected void loadDate();
+    abstract protected Observable<T> loadData();
 }

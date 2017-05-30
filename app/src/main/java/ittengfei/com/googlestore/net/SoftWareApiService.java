@@ -14,6 +14,6 @@ import retrofit2.http.Path;
 
 public interface SoftWareApiService {
 
-    @GET("software/{softwareType}")
+    @GET("{softwareType}")
     Observable<ArrayList<SoftWareBean>> getSoftWareItemByType(@Path("softwareType")String Type);
 }

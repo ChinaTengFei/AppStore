@@ -19,11 +19,11 @@ import static android.content.ContentValues.TAG;
  * Created by Administrator on 2017-05-28.
  */
 
-public class SoftWarePreSenter extends BasePresenter implements SoftWare.Presenter {
+public class SoftWarePresenter extends BasePresenter implements SoftWare.Presenter {
 
     private final SoftWare.View mSoftWareView;
 
-    public SoftWarePreSenter(SoftWare.View softWareView) {
+    public SoftWarePresenter(SoftWare.View softWareView) {
         this.mSoftWareView = softWareView;
     }
 

@@ -17,15 +17,15 @@ import butterknife.BindView;
 import interface_vc.SoftWare;
 import ittengfei.com.googlestore.R;
 import ittengfei.com.googlestore.model.TitleValueBean;
-import ittengfei.com.googlestore.presenter.SoftWarePreSenter;
+import ittengfei.com.googlestore.presenter.SoftWarePresenter;
 import ittengfei.com.googlestore.view.MainActivity;
-import ittengfei.com.googlestore.view.fragment.software.SoftWareDetailaBaseFragment;
+import ittengfei.com.googlestore.view.fragment.software.WelfareFragment;
 
 /**
  * Created by Administrator on 2017-05-28.
  */
 
-public class SoftWareFragment extends BaseFragment<SoftWarePreSenter> implements SoftWare.View {
+public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements SoftWare.View {
 
     @BindView(R.id.vp_software)
     ViewPager vpSoftWare;
@@ -34,8 +34,8 @@ public class SoftWareFragment extends BaseFragment<SoftWarePreSenter> implements
     TabLayout tabVTitle;
 
     @Override
-    protected SoftWarePreSenter createPresenter() {
-        return new SoftWarePreSenter(this);
+    protected SoftWarePresenter createPresenter() {
+        return new SoftWarePresenter(this);
     }
 
     @Override
@@ -67,9 +67,6 @@ public class SoftWareFragment extends BaseFragment<SoftWarePreSenter> implements
     }
 
 
-    public static SoftWareFragment newInstance() {
-        return new SoftWareFragment();
-    }
 
     private class SoftWarePagerAdapter extends FragmentPagerAdapter{
 
@@ -87,13 +84,21 @@ public class SoftWareFragment extends BaseFragment<SoftWarePreSenter> implements
 
         @Override
         public Fragment getItem(int position) {
-            SoftWareDetailaBaseFragment softWareDetailaBaseFragment = SoftWareDetailaBaseFragment.newInstance(titleValueList.get(position));
-            return softWareDetailaBaseFragment;
+//            SoftWareDetailaBaseFragment softWareDetailaBaseFragment = SoftWareDetailaBaseFragment.newInstance(titleValueList.get(position));
+
+            return WelfareFragment.newInstance(titleValueList.get(position).getUrl());
         }
+
+
 
         @Override
         public int getCount() {
             return titleValueList.size();
         }
+    }
+
+
+    public static SoftWareFragment newInstance() {
+        return new SoftWareFragment();
     }
 }
