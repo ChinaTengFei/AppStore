@@ -70,4 +70,17 @@ public class SoftWareBean {
         return this.des;
     }
 
+    @Override
+    public String toString() {
+        return "SoftWareBean{" +
+                "\nid=" + id +
+                ", \nname='" + name + '\'' +
+                ", \npackageName='" + packageName + '\'' +
+                ", \niconUrl='" + iconUrl + '\'' +
+                ", \nstars=" + stars +
+                ", \nsize=" + size +
+                ", \ndownloadUrl='" + downloadUrl + '\'' +
+                ", \ndes='" + des + '\'' +
+                '}';
+    }
 }
