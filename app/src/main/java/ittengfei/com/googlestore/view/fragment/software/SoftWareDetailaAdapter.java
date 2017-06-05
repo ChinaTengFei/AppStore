@@ -26,7 +26,7 @@ public class SoftWareDetailaAdapter extends RecyclerView.Adapter<SoftWareDetaila
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Holder holder = new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_soft_ware_detail, null));
+        Holder holder = new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_soft_ware_detail, parent,false));
 
         return holder;
     }

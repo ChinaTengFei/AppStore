@@ -44,9 +44,6 @@ public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements
         return inflate;
     }
 
-    @Override
-    protected void initView() {
-    }
 
     @Override
     protected void initData() {
@@ -57,6 +54,7 @@ public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements
     public void showData(ArrayList<TitleValueBean> titleValueList) {
         FragmentManager supportFragmentManager = ((MainActivity) context).getSupportFragmentManager();
         SoftWarePagerAdapter softWarePagerAdapter = new SoftWarePagerAdapter(supportFragmentManager, titleValueList);
+
         vpSoftWare.setAdapter(softWarePagerAdapter);
         tabVTitle.setupWithViewPager(vpSoftWare);
     }

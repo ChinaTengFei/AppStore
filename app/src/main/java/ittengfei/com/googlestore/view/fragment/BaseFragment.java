@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ittengfei.com.googlestore.presenter.BasePresenter;
 
 /**
@@ -19,6 +20,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment{
 
     protected Context context;
     protected T presenter;
+    private Unbinder bind;
 
     @Override
     public void onAttach(Context context) {
@@ -32,7 +34,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = getContentView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this,view);
+        bind = ButterKnife.bind(this,view);
         return view;
     }
 
@@ -50,10 +52,15 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment{
         initData();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
+    }
 
     protected abstract View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState);
 
-    protected abstract void initView();
+    protected void initView(){};
 
     protected void initData(){};
 }
