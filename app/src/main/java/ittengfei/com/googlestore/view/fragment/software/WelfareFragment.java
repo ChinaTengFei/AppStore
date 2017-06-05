@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -39,11 +40,13 @@ public class WelfareFragment extends SoftWareDetailaBaseFragment<ArrayList<SoftW
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState, ArrayList<SoftWareBean> softWareBeen) {
-        View inflate = inflater.inflate(R.layout.fragment_software_detaila,null);
+        View inflate = inflater.inflate(R.layout.fragment_software_detaila,container,false);
         ButterKnife.bind(this,inflate);
         rvMain.setLayoutManager(new LinearLayoutManager(context));
         rvMain.setAdapter(new SoftWareDetailaAdapter(softWareBeen));
-        return inflate ;
+        TextView textView = new TextView(context);
+        textView.setText("asdsd");
+        return textView ;
     }
 
     @Override
@@ -59,5 +62,6 @@ public class WelfareFragment extends SoftWareDetailaBaseFragment<ArrayList<SoftW
         WelfareFragment fragment = new WelfareFragment();
         fragment.setArguments(args);
         return fragment;
+
     }
 }

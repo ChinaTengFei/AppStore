@@ -56,10 +56,9 @@ public abstract class BaseContent<T> extends FrameLayout {
         addView(pageFailed);
 
         checkShow();
-        syncRequest();
     }
 
-    private void syncRequest() {
+    public void syncRequest() {
 
         loadData().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Observer<T>() {
 
@@ -96,8 +95,6 @@ public abstract class BaseContent<T> extends FrameLayout {
         pageFailed.setVisibility(load_state==State_Failed?VISIBLE:INVISIBLE);
         if(State_Succes==load_state){
             addView(createSuccesView(softWareBeen));
-            pageFailed.setVisibility(INVISIBLE);
-            pageFailed.setVisibility(INVISIBLE);
         }
     };
     abstract protected Observable<T> loadData();
