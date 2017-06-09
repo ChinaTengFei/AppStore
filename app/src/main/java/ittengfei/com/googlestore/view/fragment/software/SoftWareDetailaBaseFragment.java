@@ -13,14 +13,15 @@ import android.widget.TextView;
 import io.reactivex.Observable;
 import ittengfei.com.googlestore.model.TitleValueBean;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by Administrator on 2017-05-28.
  */
 
 public abstract class SoftWareDetailaBaseFragment<T> extends Fragment{
     public static final String TITLE = "TITLE";
+
+    private static final String TAG = "SoftWareDetailaBaseFrag";
+
     public TextView textView;
     private TitleValueBean content;
     protected Context context;
@@ -30,7 +31,6 @@ public abstract class SoftWareDetailaBaseFragment<T> extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-
     }
 
     @Override
@@ -60,17 +60,20 @@ public abstract class SoftWareDetailaBaseFragment<T> extends Fragment{
         return baseContent;
     }
 
+    public void show(){
+        Log.i(TAG, "show: "+this);
+        baseContent.show();
+    }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser){
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && baseContent!=null) {
-            baseContent.syncRequest();
-        }
 
         Log.d(TAG, "setUserVisibleHint() called with: isVisibleToUser = [" + isVisibleToUser +"---"+this+ "]");
     }
 
     protected abstract View initView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState, T softWareBeen);
+
     protected abstract Observable<T> loadData();
 
 }

@@ -28,6 +28,7 @@ public class GameFragment extends BaseFragment<GamePresenter> {
     @Override
     protected View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(context);
+        textView.setText(getClass().getSimpleName());
         return textView;
     }
 

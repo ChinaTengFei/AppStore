@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,20 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import interface_vc.SoftWare;
 import ittengfei.com.googlestore.R;
+import ittengfei.com.googlestore.interface_vc.SoftWare;
 import ittengfei.com.googlestore.model.TitleValueBean;
 import ittengfei.com.googlestore.presenter.SoftWarePresenter;
 import ittengfei.com.googlestore.view.MainActivity;
+import ittengfei.com.googlestore.view.fragment.software.SoftWareDetailaBaseFragment;
 import ittengfei.com.googlestore.view.fragment.software.WelfareFragment;
 
 /**
  * Created by Administrator on 2017-05-28.
  */
 
-public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements SoftWare.View {
-
+public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements SoftWare.View, ViewPager.OnPageChangeListener {
+    private static final String TAG = "SoftWareFragment";
     @BindView(R.id.vp_software)
     ViewPager vpSoftWare;
 
@@ -56,6 +58,10 @@ public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements
         SoftWarePagerAdapter softWarePagerAdapter = new SoftWarePagerAdapter(supportFragmentManager, titleValueList);
 
         vpSoftWare.setAdapter(softWarePagerAdapter);
+        onPageSelected(0);
+
+        vpSoftWare.addOnPageChangeListener(this);
+        vpSoftWare.setCurrentItem(0);
         tabVTitle.setupWithViewPager(vpSoftWare);
     }
 
@@ -64,15 +70,35 @@ public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements
 
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        Log.d(TAG, "onPageScrolled() called with: position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        SoftWarePagerAdapter adapter = (SoftWarePagerAdapter) vpSoftWare.getAdapter();
+
+        ((SoftWareDetailaBaseFragment) adapter.getItem(position)).show();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        Log.d(TAG, "onPageScrollStateChanged() called with: state = [" + state + "]");
+    }
 
 
     private class SoftWarePagerAdapter extends FragmentPagerAdapter{
 
         private final ArrayList<TitleValueBean> titleValueList;
+        private ArrayList<SoftWareDetailaBaseFragment> softWareDetailaBaseFragments=new ArrayList<SoftWareDetailaBaseFragment>();
 
         public SoftWarePagerAdapter(FragmentManager fm,ArrayList<TitleValueBean> titleValueList) {
             super(fm);
             this.titleValueList = titleValueList;
+            for (int i = 0; i < titleValueList.size(); i++) {
+                softWareDetailaBaseFragments.add(WelfareFragment.newInstance(titleValueList.get(i).getUrl()));
+            }
         }
 
         @Override
@@ -82,9 +108,7 @@ public class SoftWareFragment extends BaseFragment<SoftWarePresenter> implements
 
         @Override
         public Fragment getItem(int position) {
-//            SoftWareDetailaBaseFragment softWareDetailaBaseFragment = SoftWareDetailaBaseFragment.newInstance(titleValueList.get(position));
-
-            return WelfareFragment.newInstance(titleValueList.get(position).getUrl());
+            return softWareDetailaBaseFragments.get(position);
         }
 
 

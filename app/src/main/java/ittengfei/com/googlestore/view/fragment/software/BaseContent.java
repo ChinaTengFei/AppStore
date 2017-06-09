@@ -97,5 +97,9 @@ public abstract class BaseContent<T> extends FrameLayout {
             addView(createSuccesView(softWareBeen));
         }
     };
+
+    public void show(){
+        syncRequest();
+    }
     abstract protected Observable<T> loadData();
 }

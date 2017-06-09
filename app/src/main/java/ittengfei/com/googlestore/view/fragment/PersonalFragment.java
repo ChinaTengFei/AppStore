@@ -14,8 +14,8 @@ import ittengfei.com.googlestore.presenter.PersonalPresenter;
  */
 
 public class PersonalFragment extends BaseFragment<PersonalPresenter> {
-    public static GameFragment newInstance() {
-        return new GameFragment();
+    public static PersonalFragment newInstance() {
+        return new PersonalFragment();
     }
 
     @Override
@@ -26,6 +26,7 @@ public class PersonalFragment extends BaseFragment<PersonalPresenter> {
     @Override
     protected View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(context);
+        textView.setText(getClass().getSimpleName());
         return textView;
     }
 

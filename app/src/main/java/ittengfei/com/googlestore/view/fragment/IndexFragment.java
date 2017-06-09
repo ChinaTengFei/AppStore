@@ -14,8 +14,8 @@ import ittengfei.com.googlestore.presenter.IndexPresenter;
  */
 
 public class IndexFragment extends BaseFragment<IndexPresenter> {
-    public static GameFragment newInstance() {
-        return new GameFragment();
+    public static IndexFragment newInstance() {
+        return new IndexFragment();
     }
 
     @Override
@@ -26,6 +26,7 @@ public class IndexFragment extends BaseFragment<IndexPresenter> {
     @Override
     protected View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(context);
+        textView.setText(getClass().getSimpleName());
         return textView;
     }
 

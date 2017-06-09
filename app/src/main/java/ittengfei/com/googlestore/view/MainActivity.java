@@ -38,10 +38,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements RadioGr
         vpMain.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>(){
                 {
-                    add(GameFragment.newInstance());
-                    add(SoftWareFragment.newInstance());
-                    add(PersonalFragment.newInstance());
                     add(IndexFragment.newInstance());
+                    add(SoftWareFragment.newInstance());
+                    add(GameFragment.newInstance());
+                    add(PersonalFragment.newInstance());
                 }
             };
             @Override
@@ -64,11 +64,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements RadioGr
     }
 
     @Override
-    protected MainPresenter createPresenter() {
+    protected MainPresenter createPresenter()
+    {
         MainPresenter mainPresenter = new MainPresenter();
         return mainPresenter;
     }
-
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
         switch (i){
